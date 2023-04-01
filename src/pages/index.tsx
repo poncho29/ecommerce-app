@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import { GetServerSidePropsContext } from 'next'
 
-import { Button } from '@chakra-ui/react'
+import { Box, Button, Container } from '@chakra-ui/react'
 
 import { Header } from '@/components/Header'
 import { TopBar } from '@/components/TopBar'
@@ -40,12 +40,13 @@ export default function Home({ products, categories }: HomeProps) {
       <main>
         <TopBar />
 
-        <Header />
+        <Box marginBottom='2rem'>
+          <Header />
+        </Box>
 
-        <HomeHeroCategories categories={categories} />
-       
-        <Button>Hola</Button>
-
+        <Container size='lg'>
+          <HomeHeroCategories categories={categories} />
+        </Container>
       </main>
     </>
   )

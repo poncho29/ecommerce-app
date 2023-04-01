@@ -1,10 +1,20 @@
 import type { AppProps } from 'next/app'
-import { extendTheme } from '@chakra-ui/react'
+
+import { Container, defineStyle, extendTheme } from '@chakra-ui/react'
 import { ChakraProvider } from '@chakra-ui/react'
 import { defineStyleConfig } from '@chakra-ui/react'
 
 import '@fontsource/spartan/400.css'
 import '@fontsource/spartan/700.css'
+
+export const containerTheme = defineStyleConfig({
+  sizes: {
+    lg: defineStyle({
+      maxW: '1110px',
+      padding: 0
+    })
+  }
+})
 
 export const buttonTheme = defineStyleConfig({
   baseStyle: {
@@ -36,7 +46,10 @@ const theme = extendTheme({
     heading: `'Spartan', sans-serif`,
     body: `'Spartan', sans-serif`,
   },
-  components: { Button: buttonTheme },
+  components: {
+    Button: buttonTheme,
+    Container: containerTheme
+  },
 })
 
 export default function App({ Component, pageProps }: AppProps) {
