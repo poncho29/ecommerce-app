@@ -1,13 +1,15 @@
 import Head from 'next/head'
+import Image from 'next/image'
 import { GetServerSidePropsContext } from 'next'
 
-import { Box, Button, Container } from '@chakra-ui/react'
+import { Box, Container, Flex } from '@chakra-ui/react'
 
 import { Header } from '@/components/Header'
 import { TopBar } from '@/components/TopBar'
 import { HomeHeroCategories } from '@/components/HomeHeroCategories'
 
 import { Category } from '@/interfaces/Categories'
+import { AdvantegItem } from '@/components/AdvantegItem'
 
 type Product = {
   id: number;
@@ -37,16 +39,34 @@ export default function Home({ products, categories }: HomeProps) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
+      <TopBar />
+
+      <Box marginBottom='2rem'>
+        <Header />
+      </Box>
+
       <main>
-        <TopBar />
-
-        <Box marginBottom='2rem'>
-          <Header />
-        </Box>
-
         <Container size='lg'>
           <HomeHeroCategories categories={categories} />
-        </Container>
+
+          <Flex justifyContent='space-between' margin='2rem 0'>
+            <AdvantegItem
+              icon='/ico-truck.svg'
+              title='Free Shipping'
+              content='On all UA order or order above $100'
+            />
+            <AdvantegItem
+              icon='/ico-return.svg'
+              title='30 days return'
+              content='Simply return it within 30 days for an exchange'
+            />
+            <AdvantegItem
+              icon='/ico-support.svg'
+              title='Support 24/7'
+              content='Contact us 24 hours a day, 7 days a week'
+            />
+          </Flex>
+        </Container>        
       </main>
     </>
   )
@@ -58,8 +78,6 @@ export async function getServerSideProps(contex: GetServerSidePropsContext) {
 
   const categories = await fetch('https://fakestoreapi.com/products/categories')
     .then(res=>res.json())
-
-  console.log(categories)
 
   return {
     props: {
