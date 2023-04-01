@@ -1,11 +1,13 @@
 import Head from 'next/head'
-import { Grid, GridItem, Heading } from '@chakra-ui/react'
-import { Button } from '@chakra-ui/react'
-import { Header } from '@/components/Header'
 import { GetServerSidePropsContext } from 'next'
-import { slugify } from '@/utils/slugify'
-import Image from 'next/image'
+
+import { Button } from '@chakra-ui/react'
+
+import { Header } from '@/components/Header'
 import { TopBar } from '@/components/TopBar'
+import { HomeHeroCategories } from '@/components/HomeHeroCategories'
+
+import { Category } from '@/interfaces/Categories'
 
 type Product = {
   id: number;
@@ -20,14 +22,12 @@ type Product = {
   }
 }
 
-type Category = "electronics" | "jewelery" | "men's clothing" | "women's clothing";
-
-type Props = {
+type HomeProps = {
   products: Product[];
   categories: Category[];
 }
 
-export default function Home({ products, categories }: Props) {
+export default function Home({ products, categories }: HomeProps) {
   return (
     <>
       <Head>
@@ -42,58 +42,7 @@ export default function Home({ products, categories }: Props) {
 
         <Header />
 
-        <Grid
-          gap='1rem'
-          templateRows='200px 260px'
-          templateColumns='540px 255px 255px'
-        >
-          {categories.map((cat, id) => {
-            const slug = slugify(cat)
-            const imageUrl = `/pic-category-${slug}.jpg`
-
-            if (id === 0) {
-              return (
-                <GridItem
-                  key={id}
-                  w='100%'
-                  h='100%'
-                  bg='blue.300'
-                  position='relative'
-                  rowSpan={2}
-                >
-                  <Image src={imageUrl} alt='' fill={true} />
-                </GridItem>
-              )
-            }
-
-            if (id === categories.length - 1) {
-              return (
-                <GridItem
-                  key={id}
-                  w='100%'
-                  h='100%'
-                  bg='blue.300'
-                  position='relative'
-                  colSpan={2}
-                >
-                  <Image src={imageUrl} alt='' fill={true} />
-                </GridItem>
-              )
-            }
-
-            return (
-              <GridItem
-                key={id}
-                w='100%'
-                h='100%'
-                bg='blue.300'
-                position='relative'
-              >
-                <Image src={imageUrl} alt='' fill={true} />
-              </GridItem>
-            )
-          })}
-        </Grid>
+        <HomeHeroCategories categories={categories} />
        
         <Button>Hola</Button>
 
