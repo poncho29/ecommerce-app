@@ -1,6 +1,6 @@
 import Image from "next/image"
 
-import { Grid, GridItem, GridItemProps } from "@chakra-ui/react"
+import { Grid, GridItem } from "@chakra-ui/react"
 
 import { slugify } from "@/utils/slugify";
 import { CenteredLabel } from "./CenteredLabel"
@@ -14,26 +14,46 @@ type Props = {
 export const HomeHeroCategories = ({categories}: Props) => {
   return (
     <Grid
-      gap='30px'
-      templateRows='200px 260px'
-      templateColumns='540px 255px 255px'
+      gap={{
+        base: '.5rem',
+        md: '30px'
+      }}
+      templateRows={{
+        base: '130px 154px 130px',
+        md: '200px 260px'
+      }}
+      templateColumns={{
+        base: '1fr 1fr',
+        md: '540px 255px 255px'
+      }}
+      templateAreas={{
+        base: `
+          'cat1 cat1'
+          'cat2 cat3'
+          'cat4 cat4'
+        `,
+        md: `
+          'cat1 cat2 cat3'
+          'cat1 cat4 cat4'
+        `
+      }}
     >
       {categories.map((cat, id) => {
         const slug = slugify(cat)
         const imageUrl = `/pic-category-${slug}.jpg`
 
-        let props: GridItemProps = {
-          w: '100%',
-          h: '100%',
-          position: 'relative'
-        }
-
-        if (id === 0) props.rowSpan = 2
-
-        if (id === categories.length - 1) props.colSpan = 2
-
         return (
-          <GridItem key={id} {...props}>
+          <GridItem 
+            key={id}
+            w='100%'
+            h='100%'
+            position='relative'
+            gridArea={`cat${id + 1}`}
+            fontSize={{
+              base: '0.85rem',
+              md: '1rem'
+            }}
+          >
             <Image src={imageUrl} alt='' fill={true} />
             <CenteredLabel>{cat}</CenteredLabel>
           </GridItem>
