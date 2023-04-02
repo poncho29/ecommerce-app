@@ -2,7 +2,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { GetServerSidePropsContext } from 'next'
 
-import { Box, Container, Flex } from '@chakra-ui/react'
+import { AspectRatio, Box, Container, Flex, Text } from '@chakra-ui/react'
 
 import { Header } from '@/components/Header'
 import { TopBar } from '@/components/TopBar'
@@ -51,7 +51,29 @@ export default function Home({ products, categories }: HomeProps) {
           <HomeHeroCategories categories={categories} />
 
           <AdvantegSection />
-        </Container>        
+        </Container>       
+
+        <Box
+          width='255px'
+          margin='2rem 0'
+          border='1px solid'
+          borderColor='gray.200'
+        >
+          <AspectRatio
+            ratio={1}
+            maxWidth='100%'
+            position='relative'
+          >
+            <Image
+              fill
+              alt=''
+              style={{ objectFit: 'contain' }}
+              src='https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg'
+            />
+          </AspectRatio>
+          <Text>Fjallraven - Foldack No. 1 Backpack, Fits is Laptiop</Text>
+          <Text>$ 30.000</Text>
+        </Box>
       </main>
     </>
   )
