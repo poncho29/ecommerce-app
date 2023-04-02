@@ -23,11 +23,11 @@ export const TopBar = () => {
             <Image src='/ico-top-phone.svg' alt='' width={16} height={16} />
             +38 (050) 34 567
           </Flex>
-          <Flex as={Link} href='#' alignItems='center' gap='.5rem'>
+          <Flex as={Link} href='#' alignItems='center' gap='.5rem' display={{ base:'none', md: 'flex' }}>
             <Image src='/ico-top-location.svg' alt='' width={16} height={16} />
             Ukraine, Kyiv, Khreshchatk 1
           </Flex>
-          <Flex as={Link} href='#' alignItems='center' gap='.5rem'>
+          <Flex as={Link} href='#' alignItems='center' gap='.5rem' display={{ base:'none', md: 'flex' }}>
             <Image src='/ico-top-clock.svg' alt='' width={16} height={16} />
             All week 24/7
           </Flex>
